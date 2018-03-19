@@ -1,65 +1,29 @@
 import React, { Component } from 'react';
-import './App.css';
+import { TagBox } from './components';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tags: [],
-      currentKeyword: "",
-    }
-  }
+const FUTURE_UI_CATEGORY = [
+  {
+    path: "/tag-box",
+    keyword: "TAG BOX",
+  },
+];
 
-  handleOnChange = e => {
-    this.setState({ currentKeyword: e.target.value })
-  }
-
-  handleKeyPress = e => {
-    const { tags, currentKeyword } = this.state;
-
-    if(e.key === " " || e.key === "Enter") {
-      this.setState({
-        tags: [
-          ...tags,
-          { tag: currentKeyword }
-        ],
-        currentKeyword: ""
-      })
-    }
-  }
-
-  render() {
-    const {
-      tags,
-      currentKeyword,
-    } = this.state;
-
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">FUTURE UI</h1>
-        </header>
-        <section>
-          <input
-            type="text"
-            onKeyPress={this.handleKeyPress}
-            onChange={this.handleOnChange}
-            value={currentKeyword}
-          />
-        </section>
-        <section>
-          {tags.map((item, index) => (
-            <div
-              className="tag-box"
-              key={index}
-            >
-              {item.tag}
-            </div>
-          ))}
-        </section>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <header className="App-header">
+      <h1 className="App-title">FUTURE UI</h1>
+    </header>
+    <nav>
+      <ul>
+        {FUTURE_UI_CATEGORY.map((item, index) => (
+          <li key={index}>
+            {item.keyword}
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <TagBox />
+  </div>
+);
 
 export default App;
